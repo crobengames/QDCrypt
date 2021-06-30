@@ -121,5 +121,51 @@ namespace QDCrypt {
             
             return ASCIIEncoding.ASCII.GetString(result);
         }
+
+        private void btnClear_Click(object sender, EventArgs e) {
+            txtCipher.Clear();
+            txtResult.Clear();
+        }
+
+        private void btnAbout_Click(object sender, EventArgs e) {
+            System.Diagnostics.Process.Start("https://github.com/crobengames/QDCrypt/blob/main/LICENSE");
+        }
+
+        #region Button Visual Effect
+
+        private void btnEncrypt_MouseEnter(object sender, EventArgs e) {
+            AppButtons.UpdateButtonImage(btnEncrypt, BtnType.Encrypt, BtnState.Hovered);
+        }
+
+        private void btnEncrypt_MouseLeave(object sender, EventArgs e) {
+            AppButtons.UpdateButtonImage(btnEncrypt, BtnType.Encrypt, BtnState.Leave);
+        }
+
+        private void btnDecrypt_MouseEnter(object sender, EventArgs e) {
+            AppButtons.UpdateButtonImage(btnDecrypt, BtnType.Decrypt, BtnState.Hovered);
+        }
+
+        private void btnDecrypt_MouseLeave(object sender, EventArgs e) {
+            AppButtons.UpdateButtonImage(btnDecrypt, BtnType.Decrypt, BtnState.Leave);
+        }
+
+        private void btnClear_MouseEnter(object sender, EventArgs e) {
+            AppButtons.UpdateButtonImage(btnClear, BtnType.Clear, BtnState.Hovered);
+        }
+
+        private void btnClear_MouseLeave(object sender, EventArgs e) {
+            AppButtons.UpdateButtonImage(btnClear, BtnType.Clear, BtnState.Leave);
+        }
+
+        private void btnAbout_MouseEnter(object sender, EventArgs e) {
+            AppButtons.UpdateButtonImage(btnAbout, BtnType.About, BtnState.Hovered);
+        }
+
+        private void btnAbout_MouseLeave(object sender, EventArgs e) {
+            AppButtons.UpdateButtonImage(btnAbout, BtnType.About, BtnState.Leave);
+        }
+
+        #endregion /Button Visual Effect
+
     }
 }

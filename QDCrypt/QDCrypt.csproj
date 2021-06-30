@@ -31,6 +31,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>QDCryptIcon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
@@ -53,6 +56,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\AppButtons.cs" />
     <EmbeddedResource Include="QDCrypt.resx">
       <DependentUpon>QDCrypt.cs</DependentUpon>
     </EmbeddedResource>
@@ -64,6 +68,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -74,6 +79,33 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\clear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\about.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\decrypt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\encrypt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\abouthover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\clearhover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\decrypthover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\encrypthover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="QDCryptIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
