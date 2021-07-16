@@ -24,15 +24,18 @@ namespace QDCrypt {
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QDCrypt));
             this.txtCipher = new System.Windows.Forms.TextBox();
             this.txtHashKey = new System.Windows.Forms.TextBox();
             this.txtResult = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnHideShow = new System.Windows.Forms.Button();
             this.btnAbout = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnDecrypt = new System.Windows.Forms.Button();
             this.btnEncrypt = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -47,7 +50,7 @@ namespace QDCrypt {
             this.txtCipher.Name = "txtCipher";
             this.txtCipher.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtCipher.Size = new System.Drawing.Size(404, 215);
-            this.txtCipher.TabIndex = 2;
+            this.txtCipher.TabIndex = 6;
             this.txtCipher.Text = "Input your text or cipher.";
             // 
             // txtHashKey
@@ -57,9 +60,10 @@ namespace QDCrypt {
             this.txtHashKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtHashKey.Location = new System.Drawing.Point(87, 3);
             this.txtHashKey.Name = "txtHashKey";
-            this.txtHashKey.Size = new System.Drawing.Size(404, 24);
+            this.txtHashKey.Size = new System.Drawing.Size(375, 24);
             this.txtHashKey.TabIndex = 0;
             this.txtHashKey.Text = "Hash Key";
+            this.txtHashKey.TextChanged += new System.EventHandler(this.txtHashKey_TextChanged);
             // 
             // txtResult
             // 
@@ -73,7 +77,7 @@ namespace QDCrypt {
             this.txtResult.ReadOnly = true;
             this.txtResult.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtResult.Size = new System.Drawing.Size(404, 215);
-            this.txtResult.TabIndex = 3;
+            this.txtResult.TabIndex = 8;
             this.txtResult.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtResult_KeyDown);
             // 
             // tableLayoutPanel1
@@ -91,7 +95,23 @@ namespace QDCrypt {
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(410, 442);
-            this.tableLayoutPanel1.TabIndex = 1;
+            this.tableLayoutPanel1.TabIndex = 4;
+            // 
+            // btnHideShow
+            // 
+            this.btnHideShow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnHideShow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHideShow.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnHideShow.Image = global::QDCrypt.Properties.Resources.hide;
+            this.btnHideShow.Location = new System.Drawing.Point(460, 3);
+            this.btnHideShow.Name = "btnHideShow";
+            this.btnHideShow.Size = new System.Drawing.Size(30, 24);
+            this.btnHideShow.TabIndex = 2;
+            this.toolTip1.SetToolTip(this.btnHideShow, "Show/Hide");
+            this.btnHideShow.UseVisualStyleBackColor = true;
+            this.btnHideShow.Click += new System.EventHandler(this.btnClearHash_Click);
+            this.btnHideShow.MouseEnter += new System.EventHandler(this.btnHideShow_MouseEnter);
+            this.btnHideShow.MouseLeave += new System.EventHandler(this.btnHideShow_MouseLeave);
             // 
             // btnAbout
             // 
@@ -103,7 +123,7 @@ namespace QDCrypt {
             this.btnAbout.Location = new System.Drawing.Point(3, 389);
             this.btnAbout.Name = "btnAbout";
             this.btnAbout.Size = new System.Drawing.Size(80, 80);
-            this.btnAbout.TabIndex = 7;
+            this.btnAbout.TabIndex = 16;
             this.btnAbout.Text = "About";
             this.btnAbout.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnAbout.UseVisualStyleBackColor = true;
@@ -120,7 +140,7 @@ namespace QDCrypt {
             this.btnClear.Location = new System.Drawing.Point(3, 175);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(80, 80);
-            this.btnClear.TabIndex = 6;
+            this.btnClear.TabIndex = 14;
             this.btnClear.Text = "Clear";
             this.btnClear.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnClear.UseVisualStyleBackColor = true;
@@ -137,7 +157,7 @@ namespace QDCrypt {
             this.btnDecrypt.Location = new System.Drawing.Point(3, 89);
             this.btnDecrypt.Name = "btnDecrypt";
             this.btnDecrypt.Size = new System.Drawing.Size(80, 80);
-            this.btnDecrypt.TabIndex = 5;
+            this.btnDecrypt.TabIndex = 12;
             this.btnDecrypt.Text = "Decrypt";
             this.btnDecrypt.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnDecrypt.UseVisualStyleBackColor = true;
@@ -154,7 +174,7 @@ namespace QDCrypt {
             this.btnEncrypt.Location = new System.Drawing.Point(3, 3);
             this.btnEncrypt.Name = "btnEncrypt";
             this.btnEncrypt.Size = new System.Drawing.Size(80, 80);
-            this.btnEncrypt.TabIndex = 4;
+            this.btnEncrypt.TabIndex = 10;
             this.btnEncrypt.Text = "Encrypt";
             this.btnEncrypt.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnEncrypt.UseVisualStyleBackColor = true;
@@ -168,6 +188,7 @@ namespace QDCrypt {
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SteelBlue;
             this.ClientSize = new System.Drawing.Size(496, 473);
+            this.Controls.Add(this.btnHideShow);
             this.Controls.Add(this.btnAbout);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnDecrypt);
@@ -178,7 +199,7 @@ namespace QDCrypt {
             this.MinimumSize = new System.Drawing.Size(512, 512);
             this.Name = "QDCrypt";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "QDCrypt 1.0";
+            this.Text = "QDCrypt 1.1";
             this.Load += new System.EventHandler(this.QDCrypt_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
@@ -197,6 +218,8 @@ namespace QDCrypt {
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnAbout;
+        private System.Windows.Forms.Button btnHideShow;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 

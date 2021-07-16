@@ -9,7 +9,13 @@ using System.Text;
 using System.Windows.Forms;
 
 namespace QDCrypt {
+
     public partial class QDCrypt : Form {
+
+        private bool isPassHidden = true;
+        private bool isVisibleIconHovered = false;
+        private bool isNew = true;
+
         public QDCrypt() {
             InitializeComponent();
         }
@@ -18,30 +24,8 @@ namespace QDCrypt {
 
         }
 
-        private void btnEncrypt_Click(object sender, EventArgs e) {
 
-            string hashKey = GetSHA256Hash(txtHashKey.Text);
-            string key = hashKey.Substring(0, 32);
-            string iv = hashKey.Substring(hashKey.Length - 16);
-
-            txtResult.Text = AesEcnrypt(txtCipher.Text.Trim(), key, iv);
-        }
-
-        private void btnDecrypt_Click(object sender, EventArgs e) {
-
-            string hashKey = GetSHA256Hash(txtHashKey.Text);
-            string key = hashKey.Substring(0, 32);
-            string iv = hashKey.Substring(hashKey.Length - 16);
-
-            txtResult.Text = AesDecrypt(txtCipher.Text.Trim(), key, iv);
-        }
-
-        // Make Ctrl+A shortcut work on read only textbox
-        private void txtResult_KeyDown(object sender, KeyEventArgs e) {
-            if (e.Control && e.KeyCode == Keys.A) {
-                txtResult.SelectAll();
-            }
-        }
+        #region Encryption & Decryption
 
         private string GetSHA256Hash(string dataToHash) {
             // Setup SHA
@@ -122,14 +106,72 @@ namespace QDCrypt {
             return ASCIIEncoding.ASCII.GetString(result);
         }
 
+        #endregion /Encryption & Decryption
+
+
+        #region Main Events
+
+        private void btnEncrypt_Click(object sender, EventArgs e) {
+
+            string hashKey = GetSHA256Hash(txtHashKey.Text);
+            string key = hashKey.Substring(0, 32);
+            string iv = hashKey.Substring(hashKey.Length - 16);
+
+            txtResult.Text = AesEcnrypt(txtCipher.Text.Trim(), key, iv);
+        }
+
+        private void btnDecrypt_Click(object sender, EventArgs e) {
+
+            string hashKey = GetSHA256Hash(txtHashKey.Text);
+            string key = hashKey.Substring(0, 32);
+            string iv = hashKey.Substring(hashKey.Length - 16);
+
+            txtResult.Text = AesDecrypt(txtCipher.Text.Trim(), key, iv);
+        }
+
+        // Make Ctrl+A shortcut work on read only textbox
+        private void txtResult_KeyDown(object sender, KeyEventArgs e) {
+            
+            if (e.Control && e.KeyCode == Keys.A) 
+                txtResult.SelectAll();            
+        }
+
         private void btnClear_Click(object sender, EventArgs e) {
             txtCipher.Clear();
             txtResult.Clear();
+            txtHashKey.Clear();
         }
 
         private void btnAbout_Click(object sender, EventArgs e) {
             System.Diagnostics.Process.Start("https://github.com/crobengames/QDCrypt/blob/main/LICENSE");
         }
+
+        private void btnClearHash_Click(object sender, EventArgs e) {
+            UpdatePassVisibility();
+
+            if (isVisibleIconHovered)
+                UpdateHideShowHoveredIcon();
+            else
+                UpdateHideShowIcon();
+        }
+
+        private void txtHashKey_TextChanged(object sender, EventArgs e) {
+
+            if (!isNew)                
+                return;
+
+            isNew = false;
+            txtHashKey.UseSystemPasswordChar = isPassHidden;
+        }
+
+        private void UpdatePassVisibility() {
+            isNew = false;
+            isPassHidden = !isPassHidden;
+            txtHashKey.UseSystemPasswordChar = isPassHidden;
+        }
+
+        #endregion /Main Events
+
 
         #region Button Visual Effect
 
@@ -163,6 +205,32 @@ namespace QDCrypt {
 
         private void btnAbout_MouseLeave(object sender, EventArgs e) {
             AppButtons.UpdateButtonImage(btnAbout, BtnType.About, BtnState.Leave);
+        }
+
+        private void btnHideShow_MouseEnter(object sender, EventArgs e) {
+            isVisibleIconHovered = true;
+            UpdateHideShowHoveredIcon();
+
+        }
+        
+        private void btnHideShow_MouseLeave(object sender, EventArgs e) {
+            isVisibleIconHovered = false;
+            UpdateHideShowIcon();
+        }
+
+        private void UpdateHideShowIcon() {
+            if (isPassHidden)
+                AppButtons.UpdateButtonImage(btnHideShow, BtnType.Hide, BtnState.Leave);
+            else
+                AppButtons.UpdateButtonImage(btnHideShow, BtnType.Show, BtnState.Leave);
+        }
+
+
+        private void UpdateHideShowHoveredIcon() {
+            if (isPassHidden)
+                AppButtons.UpdateButtonImage(btnHideShow, BtnType.Hide, BtnState.Hovered);
+            else
+                AppButtons.UpdateButtonImage(btnHideShow, BtnType.Show, BtnState.Hovered);
         }
 
         #endregion /Button Visual Effect

@@ -17,7 +17,9 @@ namespace QDCrypt {
         Encrypt,
         Decrypt,
         Clear,
-        About
+        About,
+        Show,
+        Hide
     }
 
 
@@ -52,6 +54,10 @@ namespace QDCrypt {
                     return Properties.Resources.clearhover;
                 case BtnType.About:
                     return Properties.Resources.abouthover;
+                case BtnType.Show:
+                    return Properties.Resources.showhover;
+                case BtnType.Hide:
+                    return Properties.Resources.hidehover;
             }
 
             return null;
@@ -69,6 +75,10 @@ namespace QDCrypt {
                     return Properties.Resources.clear;
                 case BtnType.About:
                     return Properties.Resources.about;
+                case BtnType.Show:
+                    return Properties.Resources.show;
+                case BtnType.Hide:
+                    return Properties.Resources.hide;
             }
 
             return null;

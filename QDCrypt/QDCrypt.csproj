@@ -106,6 +106,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="QDCryptIcon.ico" />
+    <None Include="Resources\showhover.png" />
+    <None Include="Resources\hidehover.png" />
+    <None Include="Resources\hide.png" />
+    <None Include="Resources\show.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
