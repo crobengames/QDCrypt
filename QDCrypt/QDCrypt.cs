@@ -51,13 +51,13 @@ namespace QDCrypt {
         /// <returns></returns>
         private string AesEcnrypt(string plainText, string key, string iv) {
 
-            byte[] textBytes = ASCIIEncoding.ASCII.GetBytes(plainText);
+            byte[] textBytes = Encoding.UTF8.GetBytes(plainText);
 
             AesCryptoServiceProvider crypt = new AesCryptoServiceProvider {
                 BlockSize = 128,
                 KeySize = 256,
-                Key = ASCIIEncoding.ASCII.GetBytes(key),
-                IV = ASCIIEncoding.ASCII.GetBytes(iv),
+                Key = Encoding.UTF8.GetBytes(key),
+                IV = Encoding.UTF8.GetBytes(iv),
                 Padding = PaddingMode.PKCS7,
                 Mode = CipherMode.CBC
             };
@@ -85,8 +85,8 @@ namespace QDCrypt {
             AesCryptoServiceProvider crypt = new AesCryptoServiceProvider {
                 BlockSize = 128,
                 KeySize = 256,
-                Key = ASCIIEncoding.ASCII.GetBytes(key),
-                IV = ASCIIEncoding.ASCII.GetBytes(iv),
+                Key = Encoding.UTF8.GetBytes(key),
+                IV = Encoding.UTF8.GetBytes(iv),
                 Padding = PaddingMode.PKCS7,
                 Mode = CipherMode.CBC
             };
@@ -103,7 +103,7 @@ namespace QDCrypt {
                 return cipher;
             }
             
-            return ASCIIEncoding.ASCII.GetString(result);
+            return Encoding.UTF8.GetString(result);
         }
 
         #endregion /Encryption & Decryption
@@ -117,7 +117,7 @@ namespace QDCrypt {
             string key = hashKey.Substring(0, 32);
             string iv = hashKey.Substring(hashKey.Length - 16);
 
-            txtResult.Text = AesEcnrypt(txtCipher.Text.Trim(), key, iv);
+            txtResult.Text = AesEcnrypt(txtCipher.Text, key, iv);
         }
 
         private void btnDecrypt_Click(object sender, EventArgs e) {
@@ -153,6 +153,12 @@ namespace QDCrypt {
                 UpdateHideShowHoveredIcon();
             else
                 UpdateHideShowIcon();
+        }
+
+        private void OntxtHashKeyDown(object sender, KeyEventArgs e) {
+
+            if (txtHashKey.Text.Length >= 250)
+                MessageBox.Show("You reached the 250 character limit on password.", "Notice!", MessageBoxButtons.OK);
         }
 
         private void txtHashKey_TextChanged(object sender, EventArgs e) {

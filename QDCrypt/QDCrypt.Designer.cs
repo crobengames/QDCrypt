@@ -59,11 +59,13 @@ namespace QDCrypt {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtHashKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtHashKey.Location = new System.Drawing.Point(87, 3);
+            this.txtHashKey.MaxLength = 250;
             this.txtHashKey.Name = "txtHashKey";
             this.txtHashKey.Size = new System.Drawing.Size(375, 24);
             this.txtHashKey.TabIndex = 0;
-            this.txtHashKey.Text = "Hash Key";
+            this.txtHashKey.Text = "Password";
             this.txtHashKey.TextChanged += new System.EventHandler(this.txtHashKey_TextChanged);
+            this.txtHashKey.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OntxtHashKeyDown);
             // 
             // txtResult
             // 
@@ -105,7 +107,7 @@ namespace QDCrypt {
             this.btnHideShow.Image = global::QDCrypt.Properties.Resources.hide;
             this.btnHideShow.Location = new System.Drawing.Point(460, 3);
             this.btnHideShow.Name = "btnHideShow";
-            this.btnHideShow.Size = new System.Drawing.Size(30, 24);
+            this.btnHideShow.Size = new System.Drawing.Size(30, 23);
             this.btnHideShow.TabIndex = 2;
             this.toolTip1.SetToolTip(this.btnHideShow, "Show/Hide");
             this.btnHideShow.UseVisualStyleBackColor = true;
@@ -199,7 +201,7 @@ namespace QDCrypt {
             this.MinimumSize = new System.Drawing.Size(512, 512);
             this.Name = "QDCrypt";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "QDCrypt 1.1";
+            this.Text = "QDCrypt 1.2";
             this.Load += new System.EventHandler(this.QDCrypt_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
